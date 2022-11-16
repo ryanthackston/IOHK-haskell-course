@@ -3,7 +3,21 @@
 -- returns a message accordingly. 
 -- The function has to take the hourly consumption of an electrical device, the hours of daily use, and the maximum monthly consumption allowed.
 -- (Monthly usage = consumption (kW) * hours of daily use (h) * 30 days).
+monthCons :: Double -> Double -> Double
+monthCons c d = c*d*30
 
+monthConsTest = monthCons 5 6
+
+maxE :: Double
+maxE = 5000
+
+monthConsCheck :: Double -> Double -> String
+monthConsCheck monthCons maxE
+    | monthCons < maxE = "Less than the maximum allowed electricity usage"
+    | monthCons == maxE = "Equals the maximum allowed electricity usage"
+    | otherwise = "Greater than the maximum allowed electricity usage"
+
+ans1 = monthConsCheck monthConsTest  maxE
 
 -- Question 2
 -- Prelude:
@@ -11,6 +25,13 @@
 -- So `show 3` will produce `"3"` and `show (3 > 2)` will produce `"True"`.
 
 -- In the previous function, return the excess/savings of consumption as part of the message.
+showCons :: String -> String
+showCons ans1
+    | ans1 == "Less than the maximum allowed electricity usage" = "Less than the maximum allowed electricity usage. Saved " ++ show(maxE - monthConsTest) ++ " kWh"
+    | ans1 == "Equals the maximum allowed electricity usage" = "Equals the maximum allowed electricity usage. Saved " ++ show(maxE - monthConsTest) ++ " kWh"
+    | otherwise = "Greater than the maximum allowed electricity usage in excess of " ++ show(maxE - monthConsTest) ++ " kWh"
+
+-- showConsTest = showCons ans1
 
 
 -- Question 3
