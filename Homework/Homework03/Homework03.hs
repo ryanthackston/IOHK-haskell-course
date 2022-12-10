@@ -38,11 +38,37 @@ showCons ans1
 -- Write a function that showcases the advantages of using let expressions to split a big expression into smaller ones.
 -- Then, share it with other students in Canvas.
 
+drinkFactor = 1/45
+eatFactor = 1/100
+
+-- fullBelly - function to check if you have a full belly
+-- water - how much water you drank today in pounds (lb)
+-- food - how much food you ate today in pounds (lb)
+-- weight - How much do you weigh in pounds (lb)
+
+fullBelly :: Double -> Double -> Double -> String
+fullBelly water food weight =
+    let drink = (water/weight)
+        eat   = (food/weight)
+    in
+        if drink >= (drinkFactor) && eat >= (eatFactor)
+            then "I've got a full belly!"
+            else "I'm still a bit hungry"
 
 -- Question 4
 -- Write a function that takes in two numbers and returns their quotient such that it is not greater than 1.
 -- Return the number as a string, and in case the divisor is 0, return a message why the division is not
 -- possible. To implement this function using both guards and if-then-else statements.  
+
+divUpTo1 :: Double -> Double -> String
+divUpTo1 x y
+  | x == 0 && y == 0 = "Can't divide 0/0"
+  | x == 0 || y == 0 = "0"
+  | otherwise        = if abs (x / y) <= 1 
+                       then show (x / y)
+                       else show (y / x)
+
+
 
 
 -- Question 5
