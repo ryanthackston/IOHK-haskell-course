@@ -68,10 +68,13 @@ divUpTo1 x y
                        then show (x / y)
                        else show (y / x)
 
-
-
-
 -- Question 5
 -- Write a function that takes in two numbers and calculates the sum of squares for the product and quotient
 -- of those numbers. Write the function such that you use a where block inside a let expression and a
 -- let expression inside a where block. 
+sumOfSq :: Double -> Double -> Double
+sumOfSq x y
+    let productSoS = x*y
+        quotientSoS = x/y
+    where
+        pqSoS = productSoS^2 + quotientSoS^2
