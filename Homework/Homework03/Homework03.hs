@@ -72,9 +72,13 @@ divUpTo1 x y
 -- Write a function that takes in two numbers and calculates the sum of squares for the product and quotient
 -- of those numbers. Write the function such that you use a where block inside a let expression and a
 -- let expression inside a where block. 
-sumOfSq :: Double -> Double -> Double
-sumOfSq x y
-    let productSoS = x*y
-        quotientSoS = x/y
+sumOfSq :: (Eq a, Show a, Floating a) => a -> a -> String
+sumOfSq x y =
+    let showxyProd = show (xyProd^2) where xyProd = x * y
+    in  "Sum of Squares of Product and Quotient = " ++ (showxyProd) ++ " + " ++ (showxyQuot) ++ " = " ++ show((x*y)^2 + (x/y)^2)
     where
-        pqSoS = productSoS^2 + quotientSoS^2
+            showxyQuot
+               | y /= 0 = let xyQuot = (x / y)^2
+                               in show xyQuot
+               |otherwise  = "The division is not possible"
+
