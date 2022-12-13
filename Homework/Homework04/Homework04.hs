@@ -52,6 +52,11 @@ isEmp anyList = case anyList of
 -- Write the implementation of the tail function using pattern matching. But, instead of failing if
 -- the list is empty, return an empty list.
 
+tailEmp :: [a] -> [a]
+tailEmp myList = case myList of
+    x:xs     -> xs
+    []       -> []
+
 
 -- Question 6
 -- write a case expression wrapped in a function that takes an Int and adds one if it's even. Otherwise does nothing. 
