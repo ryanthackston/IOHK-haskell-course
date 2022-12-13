@@ -43,6 +43,10 @@ add3ElemTuple (x,y,z) = x + y + z
 -- Question 4
 -- Implement a function that returns True if a list is empty and False otherwise.
 
+isEmp :: [a] -> Bool
+isEmp anyList = case anyList of
+    []     -> True
+    _      -> False
 
 -- Question 5
 -- Write the implementation of the tail function using pattern matching. But, instead of failing if
