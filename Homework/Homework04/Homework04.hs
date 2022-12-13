@@ -36,6 +36,9 @@ rem3Elem' list = case list of
 -- Question 3
 -- Create a function that takes a 3-element tuple (all of type Integer) and adds them together
 
+add3ElemTuple :: (Double, Double, Double) -> Double
+add3ElemTuple (x,y,z) = x + y + z
+
 
 -- Question 4
 -- Implement a function that returns True if a list is empty and False otherwise.
