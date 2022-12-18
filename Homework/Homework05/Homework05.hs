@@ -1,10 +1,14 @@
 -- Create a higher-order function that takes 3 parameters: A function and the two parameters that that function takes, and
 -- flips the order of the parameters.
 -- For example this: `(/) 6 2` returns `3`. But this: `flip' (/) 6 2` returns `0.3333333333`
+funcFlip :: (a -> b -> c) -> b -> a -> c
+funcFlip func x y =  func y x
 
 
 -- Create the `uncurry'` function that converts a curried function to a function on pairs. So this: `(+) 1 2` that returns `3` can be written as
 -- `uncurry' (+) (1,2)` (with the two different arguments inside a pair).
+uncurry2 :: (a -> b -> c) -> ((a, b) -> c)
+uncurry2 f = \(x,y) -> f x y
 
 
 -- Create the `curry'` function that converts an uncurried function to a curried function. So this: `fst (1,2)` that returns `1` can be written as
