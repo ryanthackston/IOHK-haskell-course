@@ -22,14 +22,16 @@ curry2 f x y = f (x,y)
 checkUpper :: [Char] -> Bool
 checkUpper = any (`elem` ['A'..'Z'])
 
-
--- Create the `count` function that takes a team ("Red", "Blue", or "Green") and returns the amount of votes the team has inside `votes`.
-
 votes :: [String]
 votes = ["Red", "Blue", "Green", "Blue", "Blue", "Red"]
+teamName = ["Red", "Green", "Blue"]
 
 count2 :: String -> Int
 count2 team = length $ filter(==team) votes
+
+count2 $ teamName!!0
+count2 $ teamName!!1
+count2 $ teamName!!2
 
 -- Create a one-line function that filters `cars` by brand and then checks if there are any left.
 
