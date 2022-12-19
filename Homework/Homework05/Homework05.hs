@@ -28,6 +28,9 @@ checkUpper = any (`elem` ['A'..'Z'])
 votes :: [String]
 votes = ["Red", "Blue", "Green", "Blue", "Blue", "Red"]
 
+count2 :: String -> Int
+count2 team = length $ filter(==team) votes
+
 -- Create a one-line function that filters `cars` by brand and then checks if there are any left.
 
 cars :: [(String,Int)]
