@@ -37,3 +37,8 @@ count2 $ teamName!!2
 
 cars :: [(String,Int)]
 cars = [("Toyota",0), ("Nissan",3), ("Ford",1)]
+
+checkAnyCars :: String -> Bool
+checkAnyCars carMake = any (\(brand,stock) -> brand == carMake && stock > 0) cars
+
+show ( checkAnyCars "Nissan") ++ "! There are " ++ show(snd $ cars!!1) ++ " cars."
