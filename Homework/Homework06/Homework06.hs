@@ -14,7 +14,7 @@ repeat' x = x : repeat' x
 -- of length `n` with `x` as the value of every element. (`n` has to be Integer.)
 --
 replicate' :: Integer -> Int -> [Int]
-replicate' 0 x = []
+replicate' n x | n <= 0 = []
 replicate' n x = x : replicate' (n-1) x
 
 -- >>> replicate 0 True
