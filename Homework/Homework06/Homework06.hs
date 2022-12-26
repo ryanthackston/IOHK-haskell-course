@@ -5,12 +5,18 @@
 -- >>> repeat 17
 --[17,17,17,17,17,17,17,17,17...
 
+repeat' :: Int -> [Int]
+repeat' x = x : repeat' x
 
 -- Question 2
 -- Using the `repeat'` function and the `take` function we defined in the lesson (comes with Haskell),
 -- create a function called `replicate'` that takes a number `n` and a value `x` and creates a list
 -- of length `n` with `x` as the value of every element. (`n` has to be Integer.)
 --
+replicate' :: Integer -> Int -> [Int]
+replicate' 0 x = []
+replicate' n x = x : replicate' (n-1) x
+
 -- >>> replicate 0 True
 -- []
 -- >>> replicate (-1) True
