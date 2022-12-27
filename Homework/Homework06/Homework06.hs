@@ -31,6 +31,10 @@ replicate' n x = x : replicate' (n-1) x
 -- >>> concat' [[1,2],[3],[4,5,6]]
 -- [1,2,3,4,5,6]
 
+concat' :: Int -> [[b]] -> [b]
+concat' n _ | n <= 0 = []
+concat' n [] = []
+concat' n x = concat' (n-1) x ++ (x !! (n-1))
 
 -- Question 4
 -- Write a function called `zip'` that takes two lists and returns a list of
