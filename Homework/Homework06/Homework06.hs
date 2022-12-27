@@ -55,7 +55,9 @@ concat' n x = concat' (n-1) x ++ (x !! (n-1))
 -- >>> zip' [1..] []
 -- []
 
-
+zip' :: [a] -> [b] -> [(a,b)]
+zip' (x:xs) (y:ys) = (x,y) : zip' xs ys
+zip' _ _ = []
 
 -- Question 5
 -- Create a function called `zipWith'` that generalises `zip'` by zipping with a
