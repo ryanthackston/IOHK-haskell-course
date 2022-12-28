@@ -87,9 +87,11 @@ zipWith' _ _ _ = []
 -- >>> takeWhile (< 0) [1,2,3]
 -- []
 
-takeWhile' :: (Int -> b -> c) -> Int -> [b] -> [c]
-takeWhile' f (x:xs) = f x : takeWhile' f xs
-takeWhile' _ _ = []
+takeWhile' :: (Int -> Int -> Bool) -> Int -> [Int] -> [Int]
+takeWhile' f n (x:xs)
+  | f n x = x : takeWhile' f n xs
+  | otherwise     = []
+takeWhile' _ _ _ = []
 
 -- Question 7 (More difficult)
 -- Write a function that takes in an integer n, calculates the factorial n! and
