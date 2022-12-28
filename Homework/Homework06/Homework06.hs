@@ -84,6 +84,9 @@ zip' _ _ = []
 -- >>> takeWhile (< 0) [1,2,3]
 -- []
 
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+zipWith' _ _ _ = []
 
 -- Question 7 (More difficult)
 -- Write a function that takes in an integer n, calculates the factorial n! and
