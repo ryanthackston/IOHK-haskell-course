@@ -93,6 +93,8 @@ takeWhile' f n (x:xs)
   | otherwise     = []
 takeWhile' _ _ _ = []
 
+-- takeWhile' (<) 0 [1,2,3,-1,6,7,8]
+
 -- Question 7 (More difficult)
 -- Write a function that takes in an integer n, calculates the factorial n! and
 -- returns a string in the form of 1*2* ... *n = n! where n! is the actual result.
