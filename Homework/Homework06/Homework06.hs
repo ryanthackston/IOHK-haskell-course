@@ -99,6 +99,9 @@ takeWhile' _ _ _ = []
 -- Write a function that takes in an integer n, calculates the factorial n! and
 -- returns a string in the form of 1*2* ... *n = n! where n! is the actual result.
 
+justTheFact :: Int -> Int
+justTheFact n | n < 1 = 1
+justTheFact n = n * justTheFact (n-1)
 
 -- Question 8
 -- Below you have defined some beer prices in bevogBeerPrices and your order list in
