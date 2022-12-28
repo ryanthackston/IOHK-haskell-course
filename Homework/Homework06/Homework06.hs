@@ -72,6 +72,9 @@ zip' _ _ = []
 -- >>> zipWith (+) [1, 2, 3] [4, 5, 6]
 -- [5,7,9]
 
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+zipWith' _ _ _ = []
 
 -- Question 6
 -- Write a function called `takeWhile'` that takes a precate and a list and
@@ -84,9 +87,9 @@ zip' _ _ = []
 -- >>> takeWhile (< 0) [1,2,3]
 -- []
 
-zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
-zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
-zipWith' _ _ _ = []
+takeWhile' :: (Int -> b -> c) -> Int -> [b] -> [c]
+takeWhile' f (x:xs) = f x : takeWhile' f xs
+takeWhile' _ _ = []
 
 -- Question 7 (More difficult)
 -- Write a function that takes in an integer n, calculates the factorial n! and
