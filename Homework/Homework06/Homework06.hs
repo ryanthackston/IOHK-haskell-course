@@ -125,3 +125,14 @@ orderList =
 
 deliveryCost :: Double
 deliveryCost = 8.50
+
+-- TO-DO
+
+orderCost :: [(String, Double)] -> Double -> [(String, Double)] -> Double
+orderCost order delivCost priceList = delivCost + foldr ((+) . getItemCost getPrice) 0.0 order
+  where
+    getItemCost :: (String -> Double) -> (String, Double) -> Double
+    getItemCost f (name, num) = f name * num
+    getPrice :: String -> Double
+    getPrice item = snd $ foldr (\(s, c) acc -> if s == item then (s, c) else acc)
+("", 0.0) priceList
