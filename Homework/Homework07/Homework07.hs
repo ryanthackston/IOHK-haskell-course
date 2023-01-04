@@ -10,10 +10,6 @@
 
 minBound :: (Bool, Int, Char)
 
-bound3To9 :: Bounded Int => Int -> Int
-    minBound = 3
-    maxBound = 9
-
 
 -- Question 2
 -- The types Int and Word belong to the same type classes. What is the difference
@@ -43,3 +39,7 @@ maxBound :: (Int)
 
 -- Question 5
 -- Investigate the numeric type classes to figure out which behaviors they provide to change between numeric types.
+
+-- Num is a type class that includes all type numeric type class be it whole number or decimal. 
+-- The Floating type class and Fractional type class includes only Float and Double types for decimal numbers.
+-- The Integral type class includes only whole numbers such as Int and Integer type class.
