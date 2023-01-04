@@ -29,7 +29,8 @@ maxBound :: (Int)
 -- Question 3
 -- Investigate the `Enum` type class. What behaviours provides?
 
--- Enum, short for enumerated, has instances that creates sequentially ordered types
+-- Enum, short for enumerated, has instances that creates sequentially ordered types that gives their values in list ranges.
+-- Instances of Enum include Word, Ordering, Integer, Int, Char, Bool, (), Float, and Double
 
 
 -- Question 4
