@@ -33,6 +33,8 @@ maxBound :: (Int)
 -- Question 3
 -- Investigate the `Enum` type class. What behaviours provides?
 
+-- Enum, short for enumerated, has instances that creates sequentially ordered types
+
 
 -- Question 4
 -- Add type signatures to the functions below and use type variables and type classes.
