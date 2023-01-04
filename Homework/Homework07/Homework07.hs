@@ -37,10 +37,11 @@ maxBound :: (Int)
 -- Add type signatures to the functions below and use type variables and type classes.
 -- Then uncomment the functions and try to compile.
 
--- succ() and pred() take an Enum instance and outputs the succeeding value afterwards (succ) or the preceding value before (pred)
--- succ 1 -- 2
--- pred 0 -- -1
+f1 :: (Show a, Fractional a) => a -> a -> [Char] -> [Char]
+f1 x y z = show (x / y) ++ z
 
+f2 :: (Bounded a, Enum a, Eq a) => a -> a
+f2 x = if x == maxBound then minBound else succ x
 
 -- Question 5
 -- Investigate the numeric type classes to figure out which behaviors they provide to change between numeric types.
