@@ -37,6 +37,10 @@ maxBound :: (Int)
 -- Add type signatures to the functions below and use type variables and type classes.
 -- Then uncomment the functions and try to compile.
 
+-- succ() and pred() take an Enum instance and outputs the succeeding value afterwards (succ) or the preceding value before (pred)
+-- succ 1 -- 2
+-- pred 0 -- -1
+
 
 -- Question 5
 -- Investigate the numeric type classes to figure out which behaviors they provide to change between numeric types.
