@@ -32,6 +32,24 @@ maxBound :: (Int)
 -- Enum, short for enumerated, has instances that creates sequentially ordered types that gives their values in list ranges.
 -- Instances of Enum include Word, Ordering, Integer, Int, Char, Bool, (), Float, and Double
 
+-- succ() and pred() take an Enum instance and outputs the succeeding value afterwards (succ) or the preceding value before (pred).
+-- There are no obvious bounds of succ() and pred() other than what the computer can process. 
+-- succ 1 -- 2
+-- pred 0 -- -1
+-- succ 18446744073709551617 -- 18446744073709551618
+-- succ 2.9 -- 3.9
+-- pred (-1.8) -- -2.8
+-- pred 0.7 -- -0.30000000000000004
+
+  succ :: a -> a
+  pred :: a -> a
+  toEnum :: Int -> a
+  fromEnum :: a -> Int
+  enumFrom :: a -> [a]
+  enumFromThen :: a -> a -> [a]
+  enumFromTo :: a -> a -> [a]
+  enumFromThenTo :: a -> a -> a -> [a]
+
 
 -- Question 4
 -- Add type signatures to the functions below and use type variables and type classes.
