@@ -5,12 +5,29 @@
 -- Create a type synonym called "Grape" for the different grape names as strings.
 -- Additionally, use this type synonym for the grapes: "Sangiovese", "Cabernet-sauvignon", "Merlot" and "Garnacha".
 
+type Grape = String
+
+data WineName = WineName { grape :: Grape } deriving(Show)
+
+sangiovese = WineName "Sangiovese"
+cabernetSauvignon = WineName "Cabernet-sauvignon"
+merlot = WineName "Merlot"
+garnacha = WineName "Garnacha"
+
+
 -- Question 2
 -- The most famous regions that export wine are located in France, Italy and Spain.
 -- Each of these countries is divided up in smaller regions.
 -- These smaller regions are known for a certain style, for example the Champagne region in France
 -- Create a type synonym called "Region" for wine region given their country and region as a tuple of strings.
 -- Additionally, use this type synonym for the regions: Bordeaux in France, Tuscany in Italy and Rioja in Spain.
+
+type Region = (String,String)
+data WineRegion = WineRegion { region:: Region} deriving(Show)
+-- regions = ("Bordeaux", "France") | ("Tuscany", "Italy") | ("Rioja", "Spain")
+bordeaux = WineRegion ("Bordeaux", "France")
+tuscany = WineRegion ("Tuscany", "Italy")
+rioja = WineRegion ("Rioja", "Spain")
 
 -- Question 3
 -- A wine is either one of three kinds, these are red, white or rose wine.
