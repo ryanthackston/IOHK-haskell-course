@@ -97,7 +97,12 @@ lePetitHautLafitte = Label {nameLabel = "Le Petit Haut Lafitte", grapeLabel = "C
 -- This is a test list for the `containsGrape` function with an grape that is not in the list.
 grapeList = [larrosaRose,castiglioni,lePetitHaitLafitte]
 newGrape = "Pinot Noir"
+grapeList = [larrosaRose,castiglioni,lePetitHautLafitte]
 
--- containsGrape :: [Label] -> Int -> Bool
--- containsGrape grapeList = filter (\x -> (nameLabel x) == "Pinot Noir") grapeList
--- containsGrape ((grapeList!!0) {nameLabel = x}) = map toLower x
+newGrape = "Pinot Noir"
+
+containsGrape :: [Label] -> String -> [Label]
+
+containsGrape grapeList name = filter (\x -> (nameLabel x) == name) grapeList
+
+-- containsGrape grapeList newGrape
