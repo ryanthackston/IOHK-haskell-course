@@ -7,13 +7,16 @@
 
 type Grape = String
 
-data WineName = WineName { grape :: Grape } deriving(Show)
+data GrapeName = GrapeName { grape :: Grape } deriving(Show)
+tellGrape :: GrapeName -> String
+tellGrape (GrapeName { grape = g}) = "The grapes of " ++ g ++ " are known to make delicious wine!"
 
-sangiovese = WineName "Sangiovese"
-cabernetSauvignon = WineName "Cabernet-sauvignon"
-merlot = WineName "Merlot"
-garnacha = WineName "Garnacha"
+sangiovese = GrapeName {grape = "Sangiovese"}
+cabernetSauvignon = GrapeName {grape = "Cabernet-sauvignon"}
+merlot = GrapeName {grape = "Merlot"}
+garnacha = GrapeName {grape = "Garnacha"}
 
+-- tellGrape sangiovese
 
 -- Question 2
 -- The most famous regions that export wine are located in France, Italy and Spain.
@@ -24,10 +27,15 @@ garnacha = WineName "Garnacha"
 
 type Region = (String,String)
 data WineRegion = WineRegion { region:: Region} deriving(Show)
--- regions = ("Bordeaux", "France") | ("Tuscany", "Italy") | ("Rioja", "Spain")
-bordeaux = WineRegion ("Bordeaux", "France")
-tuscany = WineRegion ("Tuscany", "Italy")
-rioja = WineRegion ("Rioja", "Spain")
+
+tellWineRegion :: WineRegion -> String
+tellWineRegion (WineRegion { region = r}) = "The region of " ++ fst r ++ ", " ++ snd r ++ " makes exquisite wine!"
+
+bordeaux = WineRegion { region = ("Bordeaux", "France")}
+tuscany = WineRegion { region = ("Tuscany", "Italy")}
+rioja = WineRegion { region = ("Rioja", "Spain")}
+
+-- tellWineRegion bordeaux
 
 -- Question 3
 -- A wine is either one of three kinds, these are red, white or rose wine.
@@ -36,27 +44,51 @@ rioja = WineRegion ("Rioja", "Spain")
 -- Additionally, use this data type for the examples: red wine with 14.5% alcohol, white wine with 13% alcohol 
 -- and Rose wine with 12% alcohol.
 
+type Kind = (String, Float)
+
+data WineKind = WineKind { kind :: Kind} deriving(Show)
+
+tellWineKind :: WineKind -> String
+tellWineKind (WineKind { kind = k}) = "This kind of wine is " ++ fst k ++ " with " ++ show(snd k) ++ "% alcohol!"
+
+red = WineKind{ kind = ("Red", 14.5)}
+white = WineKind{ kind = ("White", 13)}
+rose = WineKind{ kind = ("Rose", 12)}  
+
+-- tellWineKind rose
+
 -- Question 4
 -- In the world of wines, bottles display all of the above information for the consumer on its label.
 -- Create a record type called "Label" that captures the grapes that are in a wine, the region its from,
 -- and it's kind. Notice that some wines are a blended combination of multiple grapes!
 -- Additionally, create for each of the described wine below a label.
 
+data Label = Label {nameLabel:: String
+                    , grapeLabel::Grape
+                    , regionLabel::Region
+                    , kindLabel::Kind} deriving(Show)
+
+tellLabel :: Label -> String
+tellLabel (Label {nameLabel = n
+                    , grapeLabel = g
+                    , regionLabel = r
+                    , kindLabel = k})
+    = "This wine is called " ++ n ++ " and it is made with the finest " ++ g ++ " grapes in the region of " ++ (fst r) ++ ", " ++ (snd r) ++ "! It is a " ++ fst k ++ " kind of wine with " ++ show(snd k) ++ "% alcohol."
+
 -- Larrosa Rose is a rose wine from the region Rioja. It is made from the Garnacha grape and 
 -- has a alcohol level of 14%.
-data Label = Label {nameLabel:: String, grapeLabel::GrapeName, regionLabel::WineRegion, kindLabel::Kind} deriving(Show)
 
-larrosaRose = Label "Larrosa Rose" garnacha rioja ("Rose", 14.0)
+larrosaRose = Label {nameLabel="Larrosa Rose", grapeLabel = "Garnacha", regionLabel = ("Rioja", "Spain"), kindLabel = ("Rose", 14)}
 
 -- Castiglioni is a red wine from the region of Tuscany. It is made from the grape Sangiovese and
 -- has an alcohol level of 12.5%
 
-castiglioni = Label "Castiglioni" sangiovese tuscany ("Red", 12.5)
+castiglioni = Label {nameLabel = "Castiglioni", grapeLabel = "Sangiovese", regionLabel = ("Tuscany", "Italy"), kindLabel = ("Red", 12.5)}
 
 -- Bordeaux is known for its red wine, these are mainly a blend between Cabernet-sauvignon and Merlot.
 -- Create a Label for the wine "Le Petit Haut Lafitte" that has an alcohol percentage 13.5%.
 
-lePetitHautLafitte = Label "Le Petit Haut Lafitte" (GrapeName "Cabernet-Sauvignon and Merlot") bordeaux ("Red", 13.5)
+lePetitHautLafitte = Label {nameLabel = "Le Petit Haut Lafitte", grapeLabel = "Cabernet-Sauvignon and Merlot", regionLabel = ("Bordeux", "France"), kindLabel = ("Red", 13.5)}
 
 -- Question 5
 -- Write a function `containsGrape` that takes a list of Labels and a Grape and returns a boolean.
