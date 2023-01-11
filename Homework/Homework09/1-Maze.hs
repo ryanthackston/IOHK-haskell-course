@@ -53,3 +53,12 @@ still need to make another choice.
 
 6. Adapt adapt "solveMaze" function to use "showCurrentChoice" and play with your new game using GHCi! :D
 -}
+
+data Left    :: "You hit a wall!"   | Has a 
+data Right   :: "You hit a wall!"   | Has a
+data Forward :: "You hit a wall!"   | Has a
+
+data Direction a :: Left a | Right a | Forward a 
+
+Maze = Forward :-> Right :-> Left :-> Right :-> Left :-> Left :-> Forward 
+
