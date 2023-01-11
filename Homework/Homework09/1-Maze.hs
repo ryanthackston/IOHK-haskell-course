@@ -54,11 +54,10 @@ still need to make another choice.
 6. Adapt adapt "solveMaze" function to use "showCurrentChoice" and play with your new game using GHCi! :D
 -}
 
-data Left    :: Empty   | Has a 
-data Right   :: Empty   | Has a
-data Forward :: Empty   | Has a
-
-data Direction a :: Left a | Right a | Forward a 
+data Direction a = Left a | Right a | Forward a deriving(Show)
+    | data Left a    = EmptyS | Node a (Direction a) deriving(Show)
+    | data Right a   = EmptyS | Node a (Direction a) deriving(Show)
+    | data Forward a = EmptyS | Node a (Direction a) deriving(Show)
 
 Maze = Forward :-> Right :-> Left :-> Right :-> Left :-> Left :-> Forward 
 
