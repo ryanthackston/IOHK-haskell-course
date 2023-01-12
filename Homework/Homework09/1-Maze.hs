@@ -62,5 +62,5 @@ data Move a = Left a (Move a) | Right a (Move a) | Forward a (Move a) deriving(S
 
 -- data Maze a (Move a) = [Forward, Right, Left, Right, Left, Left, Forward]
 
-data Maze Move a = Forward :-> Right :-> Left :-> Right :-> Left :-> Left :-> Forward 
+data Maze a (Move a) = Forward a :-> Right a :-> Left a :-> Right a :-> Left a :-> Left a :-> Forward a :-> (Empty)
 
