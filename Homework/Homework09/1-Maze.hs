@@ -58,7 +58,7 @@ still need to make another choice.
 -- data Right a   = Empty | Node a (Move a) deriving(Show)
 -- data Forward a = Empty | Node a (Move a) deriving(Show)
 
-data Move a = Left a (Move a) | Right a (Move a) | Forward a (Move a) deriving(Show)
+data Move a = Left a (Move a) (Move a) (Move a)| Right a (Move a) (Move a) (Move a)| Forward a (Move a) (Move a) (Move a) deriving(Show)
 
 -- data Maze a (Move a) = [Forward, Right, Left, Right, Left, Left, Forward]
 
