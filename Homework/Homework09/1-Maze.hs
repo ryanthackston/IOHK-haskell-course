@@ -62,5 +62,8 @@ data Move a = Left a (Move a) (Move a) (Move a)| Right a (Move a) (Move a) (Move
 
 -- data Maze a (Move a) = [Forward, Right, Left, Right, Left, Left, Forward]
 
+-- Maze :: [Move]
+-- maze :: [Move] -> String
+
 data Maze a (Move a) = Forward a :-> Right a :-> Left a :-> Right a :-> Left a :-> Left a :-> Forward a :-> (Empty)
 
