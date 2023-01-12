@@ -60,5 +60,7 @@ still need to make another choice.
 
 data Move a = Left a (Move a) | Right a (Move a) | Forward a (Move a) deriving(Show)
 
+-- data Maze a (Move a) = [Forward, Right, Left, Right, Left, Left, Forward]
+
 data Maze Move a = Forward :-> Right :-> Left :-> Right :-> Left :-> Left :-> Forward 
 
