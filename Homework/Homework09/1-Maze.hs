@@ -54,16 +54,34 @@ still need to make another choice.
 6. Adapt adapt "solveMaze" function to use "showCurrentChoice" and play with your new game using GHCi! :D
 -}
 
--- data Left a    = Empty | Node a (Move a) deriving(Show)
--- data Right a   = Empty | Node a (Move a) deriving(Show)
--- data Forward a = Empty | Node a (Move a) deriving(Show)
+data Move = GoLeft | GoRight | GoForward deriving(Eq, Show)
 
-data Move a = Left a (Move a) (Move a) (Move a)| Right a (Move a) (Move a) (Move a)| Forward a (Move a) (Move a) (Move a) deriving(Show)
+data Maze = Maze{ path  :: [Move],
+                  wall  :: String,
+                  inside:: String,
+                  exit  :: String} deriving(Eq, Show)
 
--- data Maze a (Move a) = [Forward, Right, Left, Right, Left, Left, Forward]
+move:: Maze -> Move -> Maze
+move   maze step  
+               | mazeStep == step = remainingPath
+               | otherwise        = maze
+      where mazeStep = head $ path maze
+            remainingPath = Maze (tail (path maze)) (wall maze) (inside maze) (exit maze)
 
--- Maze :: [Move]
--- maze :: [Move] -> String
 
-data Maze a (Move a) = Forward a :-> Right a :-> Left a :-> Right a :-> Left a :-> Left a :-> Forward a :-> (Empty)
+testMaze = Maze { path   = [GoRight, GoLeft, GoRight, GoLeft, GoLeft, GoForward]
+                , wall   = "You've hit a wall!"
+                , inside = "You've still inside the maze. Choose a path"
+                , exit   = "You've found the exit"}
+
+
+solveMaze :: Maze -> [Move] -> String
+solveMaze (Maze{path = []}) _ = "Maze without a path" -- > solveMaze (Maze [] "Wall" "Inside" "Exit") []
+solveMaze  maze          []   = inside maze
+solveMaze maze(step:moves) 
+                    | path maze == (step:moves) = exit maze -- Found Exit!
+                    | head (path maze) == step  = callSolve -- Inside deeper in Maze
+                    | otherwise                 = wall maze -- You hit a wall!
+                where nexPath   = move ((Maze (path maze)) (wall maze) (inside maze) (exit maze)) step
+                      callSolve = (solveMaze nexPath moves) 
 
