@@ -42,3 +42,57 @@ Using GHCi, like the "Maze" game, this game should look like this:
 *Main> solveForest testForest [GoForward, GoLeft , GoRight]
 "YOU'VE FOUND THE EXIT!!"
 -}
+
+data Move = GoForward | GoLeft | GoRight deriving (Show,Eq)
+data Tree a = FoundExit | Passage a (Tree a) (Tree a) (Tree a) deriving (Eq,Show)
+
+move :: Tree Int -> Move -> (Int, Tree Int)
+move (FoundExit)      _          = (0, FoundExit)
+move (Passage x l _ _) GoLeft    = (x,l)
+move (Passage x _ f _) GoForward = (x,f)
+move (Passage x _ _ r) GoRight   = (x,r)
+
+type Stamina = Int
+stamina = 10 :: Stamina
+
+solveForest ::(Stamina,Tree Int) -> [Move] -> String -- (Int,Tree Int)
+solveForest   (_, FoundExit) _       = showMsg (stamina,FoundExit)
+solveForest   (st,  _      ) []      = showMsg (st, Passage 0 FoundExit FoundExit FoundExit)  
+solveForest   (st, fo) (step:moves)            
+                | continue           = solveForest (st-x, f) moves
+                | otherwise          = showMsg (st, Passage 0 FoundExit FoundExit FoundExit)    
+          where (x,f)    = move fo step 
+                continue = (st-x) > 0
+
+showMsg :: (Stamina, Tree Int) -> String
+showMsg (_, FoundExit) = "You've found the exit!"
+showMsg (st, _)
+            | st > 0 = "You have" ++ (show st) ++ "Stamina, and you're still inside the forest. Choose a path..."
+            | otherwise = "You ran out of stamina and died wump wump wuuuuuump..."
+
+forest :: Tree Int
+forest = Passage 3
+    (Passage 4 --Left
+        (Passage 3 FoundExit (Passage 2 FoundExit FoundExit FoundExit) FoundExit)
+        (Passage 1 (Passage 2 FoundExit FoundExit FoundExit) FoundExit FoundExit)
+        (Passage 2 (Passage 5 FoundExit FoundExit FoundExit) FoundExit (Passage 4 FoundExit FoundExit FoundExit))
+        -- [GoLeft, GoRight, GoForward]
+    )
+    (Passage 5 -- Center
+        (Passage 2
+            (Passage 4 FoundExit FoundExit FoundExit) FoundExit
+            (Passage 1 FoundExit FoundExit FoundExit)
+        )
+        (Passage 3 FoundExit (Passage 1 FoundExit FoundExit FoundExit) FoundExit)
+        (Passage 1 FoundExit FoundExit FoundExit)
+    )
+        (Passage 2 -- Right
+            (Passage 4 
+                (Passage 1 FoundExit FoundExit FoundExit)
+                FoundExit
+                (Passage 5 FoundExit FoundExit FoundExit)
+            )
+        (Passage 9 FoundExit FoundExit FoundExit)
+        (Passage 10 FoundExit FoundExit FoundExit)
+    )
+
