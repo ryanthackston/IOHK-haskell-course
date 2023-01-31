@@ -48,9 +48,7 @@ instance Container (MailedBox t d) where
   contains (MailBoxTo _ _ content) checkContent = content == checkContent
   contains (EmptyMailBox _ _) _ = False
   
-  replace (MailBoxTo tag detail _) x y = MailBoxTo (tag x) (detail y)
-  replace (EmptyMailBox tag detail) x y = MailBoxTo (tag x) (detail y)
-
+replace (MailBoxTo tag detail content) newContent = MailBoxTo tag detail newContent
 
 -- Question 2 --
 -- Create instances for Show, Eq, and Ord for these three data types (use
