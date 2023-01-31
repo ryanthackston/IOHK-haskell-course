@@ -12,7 +12,45 @@ Continuing with the logistics software of the lesson:
  	- The parameter `a` is the content of the MailedBox
 -}
 
+data Box a       = Empty          | Has a           deriving (Show)
+data Present t a = EmptyPresent t | PresentFor t a  deriving (Show)
+
+class Container c where
+  isEmpty :: c a -> Bool
+  contains :: (Eq a) => c a -> a -> Bool
+  replace :: c a -> b -> c b
+
+instance Container Box where
+  isEmpty Empty      = True
+  isEmpty _          = False
+
+  contains (Has x) y = x == y
+  contains Empty _   = False
+
+  replace _ x        = Has x
+
+instance Container (Present t) where
+  isEmpty (EmptyPresent _ ) = True
+  isEmpty _                 = False
+
+  contains (PresentFor _ x) y = x == y
+  contains (EmptyPresent _) _ = False
+
+  replace (PresentFor tag _) x = PresentFor tag x
+  replace (EmptyPresent tag) x = PresentFor tag x
+
 data MailedBox t d a = EmptyMailBox t d | MailBoxTo t d a
+
+instance Container (MailedBox t d) where
+  isEmpty (EmptyMailBox _ _)   = True
+  isEmpty _                    = False
+
+  contains (MailBoxTo _ _ content) checkContent = content == checkContent
+  contains (EmptyMailBox _ _) _ = False
+  
+  replace (MailBoxTo tag detail _) x y = MailBoxTo (tag x) (detail y)
+  replace (EmptyMailBox tag detail) x y = MailBoxTo (tag x) (detail y)
+
 
 -- Question 2 --
 -- Create instances for Show, Eq, and Ord for these three data types (use
