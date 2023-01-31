@@ -53,18 +53,24 @@ replace (MailBoxTo tag detail content) newContent = MailBoxTo tag detail newCont
 -- Question 2 --
 -- Create instances for Show, Eq, and Ord for these three data types (use
 -- automatic deriving whenever possible):
+data Position = Intern | Junior | Senior | Manager | Chief deriving(Show, Eq, Ord)
 
-data Position = Intern | Junior | Senior | Manager | Chief
-
-data Experience = Programming | Managing | Leading
+data Experience = Programming | Managing | Leading deriving(Show, Eq, Ord)
 
 type Address = String
 
-data Salary = USD Double | EUR Double
+data Salary = USD Double | EUR Double deriving(Show, Eq, Ord)
+
+convert :: Salary -> Salary
+convert (USD x) = EUR (x * 0.91966027)
+convert (EUR x) = USD (x * 1.0874084)
 
 data Relationship
   = Contractor Position Experience Salary Address
   | Employee Position Experience Salary Address
+  deriving(Show, Eq)
+
+show(Contractor Senior Managing (USD 96000) "SomeGuyLivesHere, MI")
 
 data Pokemon = Pokemon
   { pName :: String,
