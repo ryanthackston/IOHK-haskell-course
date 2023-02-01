@@ -86,17 +86,31 @@ venusaur = Pokemon "Venusaur" ["Grass", "Poison"] 1 3
 -- Question 3 -- EXTRA CREDITS
 -- Uncomment the next code and make it work (Google what you don't know).
 
--- -- Team memeber experience in years
--- newtype Exp = Exp Double
---
--- -- Team memeber data
--- type TeamMember = (String, Exp)
---
--- -- List of memeber of the team
--- team :: [TeamMember]
--- team = [("John", Exp 5), ("Rick", Exp 2), ("Mary", Exp 6)]
---
--- -- Function to check the combined experience of the team
--- -- This function applied to `team` using GHCi should work
--- combineExp :: [TeamMember] -> Exp
--- combineExp = foldr ((+) . snd) 0
+-- Team member experience in years
+newtype Exp = Exp Double deriving(Show, Int)
+
+-- Team member data
+type TeamMember = (String, Exp)
+
+-- List of member of the team
+team :: [TeamMember]
+team = [("John", Exp 5), ("Rick", Exp 2), ("Mary", Exp 6)]
+
+-- {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+instance (Num Exp) where
+  (+) (Exp x) (Exp y) = Exp (x + y)
+  (*) (Exp x) (Exp y) = Exp (x * y)
+  negate (Exp x)      = (Exp x) * (Exp(-1))
+
+  fromInteger x       = Exp (fromInteger x)
+
+  abs (Exp x) | x > 0     = Exp x
+              | otherwise = Exp (negate x)
+
+  signum (Exp x) | x > 0     = 1
+                 | otherwise = (-1)
+
+-- Function to check the combined experience of the team
+-- This function applied to `team` using GHCi should work
+combineExp :: [TeamMember] -> Exp
+combineExp team = foldr ((+) . snd) 0
