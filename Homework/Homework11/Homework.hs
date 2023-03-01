@@ -19,6 +19,8 @@ Define an IO action that counts the number of files in the current directory
 and prints it to the terminal inside a string message.
 -}
 
+listDirectory ("/workspace/haskell-course/Homework")
+
 -- listFiles :: IO ()
 
 {-
