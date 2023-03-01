@@ -21,6 +21,12 @@ and prints it to the terminal inside a string message.
 
 listDirectory ("/workspace/haskell-course/Homework")
 
+folderName :: IO ()
+folderName = do
+  putStrLn  "What is your directory?"
+  folderpath <- getLine
+  let ls = listDirectory folderpath in return ls
+
 -- listFiles :: IO ()
 
 {-
