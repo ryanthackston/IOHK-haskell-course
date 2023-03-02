@@ -21,6 +21,12 @@ and prints it to the terminal inside a string message.
 
 listDirectory ("/workspace/haskell-course/Homework")
 
+dir = "/workspace/haskell-course/Homework/"
+a = listDirectory dir
+iDir = (return dir:: IO String)
+
+concatDir :: IO String -> IO String
+
 -- folderName :: IO ()
 -- folderName = do
 --  putStrLn  "What is your directory?"
