@@ -21,11 +21,29 @@ and prints it to the terminal inside a string message.
 
 listDirectory ("/workspace/haskell-course/Homework")
 
-folderName :: IO ()
-folderName = do
-  putStrLn  "What is your directory?"
-  folderpath <- getLine
-  let ls = listDirectory folderpath in return ls
+-- folderName :: IO ()
+-- folderName = do
+--  putStrLn  "What is your directory?"
+--  folderpath <- getLine
+--  let ls = listDirectory folderpath in return ls
+  
+--listFiles :: IO ()
+--listFiles = do
+--        putStrLn "What is your folder path?"
+--        d <- getLine
+--        listDir <- listDirectory d
+--        let total  =  length listDir
+--        putStrLn $ "There are " ++ show total ++ " total files and directories"
+
+listFiles :: IO ()
+listFiles = do
+        putStrLn "What is your folder path?"
+        d <- getLine
+        listDir <- listDirectory d
+        let totalFile listDir(x:xs) = if doesFileExist (d ++ x ) then 1 + totalFile(xs) else totalFile(xs) 
+        putStrLn $ "There are " ++ show totalFile ++ " total files"
+
+
 
 -- listFiles :: IO ()
 
