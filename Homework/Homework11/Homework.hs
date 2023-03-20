@@ -25,30 +25,38 @@ dir = "/workspace/haskell-course/Homework/"
 a = listDirectory dir
 iDir = (return dir:: IO String)
 
-concatDir :: IO String -> IO String
+foo :: IO String
+foo = do
+ let d = "/workspace/haskell-course/Homework/"
+ let listDir = "this.file"
+ return $ d ++ listDir
 
--- folderName :: IO ()
--- folderName = do
---  putStrLn  "What is your directory?"
---  folderpath <- getLine
---  let ls = listDirectory folderpath in return ls
-  
---listFiles :: IO ()
---listFiles = do
---        putStrLn "What is your folder path?"
---        d <- getLine
---        listDir <- listDirectory d
---        let total  =  length listDir
---        putStrLn $ "There are " ++ show total ++ " total files and directories"
+countFiles :: IO ()
+countFiles = do
+  putStrLn "What is your folder path?"
+  d <- getLine
+  dirList <- listDirectory d
+  let
+    -- define a helper function `go` to count the files
+    go :: [FilePath] -> IO Int
+    go (x:xs) = do
+      isFile <- doesFileExist (d ++ x) -- check if head is a file
+      -- since `doesFileExist` is an IO action, the helper function must return an IO value (note the signature above)
+      -- we have to bind the result to a variable ("exists") before we can use it as a regular Bool
+      if isFile then (+ 1) <$> go xs -- increment the number of files in the tail
+      -- requires `<$>` (a.k.a `fmap`) to "inject" the addition operation into IO context  
+      else go xs 
+    go [] = return 0 -- base case that terminates the recursion with a zero value (lifted into the IO context)
+  fileCount <- go dirList -- since `go` returns an IO value, we need to bind it before we can print it
+  putStrLn $ "There are " ++ show fileCount ++ " total files"
 
-listFiles :: IO ()
-listFiles = do
-        putStrLn "What is your folder path?"
-        d <- getLine
-        listDir <- listDirectory d
-        let totalFile listDir(x:xs) = if doesFileExist (d ++ x ) then 1 + totalFile(xs) else totalFile(xs) 
-        putStrLn $ "There are " ++ show totalFile ++ " total files"
-
+countFiles' :: IO () 
+countFiles' = do  
+ putStrLn "What is your folder path?"
+ d <- getLine 
+ dirList <- listDirectory d 
+ fileCount <- filterM doesFileExist dirList 
+ putStrLn $ "There are " ++ show (length fileCount) ++ " total files"
 
 
 -- listFiles :: IO ()
