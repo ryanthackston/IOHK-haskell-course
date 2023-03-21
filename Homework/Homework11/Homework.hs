@@ -131,6 +131,14 @@ Use the getCPUTime :: IO Integer function to get the CPU time before and after t
 The CPU time here is given in picoseconds (which is 1/1000000000000th of a second).
 -}
 
+timeIO :: IO a -> IO ()
+timeIO io = do
+  t1 <- getCPUTime
+  _ <- io
+  t2 <- getCPUTime
+  let elapsedTime = fromIntegral (t2 - t1) / 1000000000000
+  print $ elapsedTime
+
 
 -- timeIO :: IO a -> IO ()
 
