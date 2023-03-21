@@ -155,17 +155,17 @@ benchmark n = do
   t1 <- getCPUTime
   print $ primes1 n
   t2 <- getCPUTime
-  putStrLn ""
+  putStrLn
 
   t3 <- getCPUTime
   print $ primes2 n
   t4 <- getCPUTime 
-  putStrLn ""
+  putStrLn
 
   t5 <- getCPUTime
   print $ primes3 n
   t6 <- getCPUTime 
-  putStrLn ""
+  putStrLn
 
   putStrLn $ "Prime1: " ++ show (fromIntegral (t2 - t1) / 1000000000000)
   putStrLn $ "Prime2: " ++ show (fromIntegral (t4 - t3) / 1000000000000)
