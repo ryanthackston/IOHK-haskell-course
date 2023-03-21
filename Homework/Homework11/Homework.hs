@@ -68,6 +68,29 @@ to a file called msg.txt, and after that, it reads the text from the msg.txt
 file and prints it back. Use the writeFile and readFile functions.
 -}
 
+writeMessage :: IO ()
+writeMessage = do
+  putStrLn "Write a message"
+  msg <- getLine
+  putStrLn "Type a file path"
+  filepath <- getLine
+  putStrLn "Type a file name"
+  filename <- getLine
+  writeFile (filepath ++ filename) msg
+
+writeNRead :: IO () -> IO String
+writeNRead = do
+    putStrLn "Write a message"
+    msg <- getLine
+    filepath'  <- (return "/workspace/haskell-course/Homework/Homework11/" :: IO String)
+    filename' <- (return "msg.txt" :: IO String)
+    let file' = (filepath' ++ filename')
+    let filepath = "/workspace/haskell-course/Homework/Homework11/"
+    let filename =  "msg.txt"
+    let file = (filepath ++ filename)
+    writeFile file msg
+    readFile file
+
 -- createMsg :: IO ()
 
 
