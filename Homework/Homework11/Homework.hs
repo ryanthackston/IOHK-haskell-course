@@ -171,6 +171,18 @@ benchmark n = do
   putStrLn $ "Prime2: " ++ show (fromIntegral (t4 - t3) / 1000000000000)
   putStrLn $ "Prime3: " ++ show (fromIntegral (t6 - t5) / 1000000000000)
 
+
+benchmark' :: IO ()
+benchmark' =
+  do
+    x <- getLine
+    let n = (read x) :: Integer
+    -- (timeIO.print) 4063 -- prints out 4063 and gives the time it took to compute
+    -- (timeIO.print.primes1) 4063 -- shows every output  prime number and time to compute
+    -- (timeIO.print.last.primes1) 4063 -- shows only the last output which is the last prime number and time to compute
+    (timeIO . print . last . primes1) n
+    (timeIO . print . last . primes2) n
+    (timeIO . print . last . primes3) n
 -- benchmark :: IO ()
 
 {-
