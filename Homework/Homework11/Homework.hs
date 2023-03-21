@@ -77,20 +77,16 @@ writeMessage = do
   putStrLn "Type a file name"
   filename <- getLine
   writeFile (filepath ++ filename) msg
-
-writeNRead :: IO () -> IO String
+  
+writeNRead :: IO ()
 writeNRead = do
     putStrLn "Write a message"
     msg <- getLine
     filepath'  <- (return "/workspace/haskell-course/Homework/Homework11/" :: IO String)
     filename' <- (return "msg.txt" :: IO String)
     let file' = (filepath' ++ filename')
-    let filepath = "/workspace/haskell-course/Homework/Homework11/"
-    let filename =  "msg.txt"
-    let file = (filepath ++ filename)
-    writeFile file msg
-    readFile file
-
+    writeFile file' msg
+    readFile  file' >>= putStrLn 
 -- createMsg :: IO ()
 
 
