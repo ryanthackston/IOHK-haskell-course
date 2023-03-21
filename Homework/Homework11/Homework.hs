@@ -131,8 +131,19 @@ Use the getCPUTime :: IO Integer function to get the CPU time before and after t
 The CPU time here is given in picoseconds (which is 1/1000000000000th of a second).
 -}
 
-timeIO :: Integer -> IO ()
-timeIO n = do
+
+-- timeIO :: IO a -> IO ()
+
+
+{-
+-- Question 4 --
+Write an action that retrieves a value from the standard input, parses it as an integer,
+and compares the time all three algorithms take to produce the largest prime before the
+limit. Print the number and time to the standard output.
+-}
+
+benchmark :: Integer -> IO ()
+benchmark n = do
   t1 <- getCPUTime
   print $ primes1 n
   t2 <- getCPUTime
@@ -151,16 +162,6 @@ timeIO n = do
   putStrLn $ "Prime1: " ++ show (fromIntegral (t2 - t1) / 1000000000000)
   putStrLn $ "Prime2: " ++ show (fromIntegral (t4 - t3) / 1000000000000)
   putStrLn $ "Prime3: " ++ show (fromIntegral (t6 - t5) / 1000000000000)
-
--- timeIO :: IO a -> IO ()
-
-
-{-
--- Question 4 --
-Write an action that retrieves a value from the standard input, parses it as an integer,
-and compares the time all three algorithms take to produce the largest prime before the
-limit. Print the number and time to the standard output.
--}
 
 -- benchmark :: IO ()
 
