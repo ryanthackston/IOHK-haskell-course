@@ -2,6 +2,8 @@ import Data.List
 import System.CPUTime (getCPUTime)
 import System.Directory (doesFileExist, listDirectory)
 import Text.XHtml (thead)
+import Control.Monad (filterM)
+
 
 {-
 We imported some functions that you'll need to complete the homework.
