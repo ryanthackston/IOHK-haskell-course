@@ -131,6 +131,27 @@ Use the getCPUTime :: IO Integer function to get the CPU time before and after t
 The CPU time here is given in picoseconds (which is 1/1000000000000th of a second).
 -}
 
+timeIO :: Integer -> IO ()
+timeIO n = do
+  t1 <- getCPUTime
+  print $ primes1 n
+  t2 <- getCPUTime
+  putStrLn ""
+
+  t3 <- getCPUTime
+  print $ primes2 n
+  t4 <- getCPUTime 
+  putStrLn ""
+
+  t5 <- getCPUTime
+  print $ primes3 n
+  t6 <- getCPUTime 
+  putStrLn ""
+
+  putStrLn $ "Prime1: " ++ show (fromIntegral (t2 - t1) / 1000000000000)
+  putStrLn $ "Prime2: " ++ show (fromIntegral (t4 - t3) / 1000000000000)
+  putStrLn $ "Prime3: " ++ show (fromIntegral (t6 - t5) / 1000000000000)
+
 -- timeIO :: IO a -> IO ()
 
 
